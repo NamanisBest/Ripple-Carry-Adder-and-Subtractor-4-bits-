@@ -1,0 +1,18 @@
+module adder_subtractor (in1, in2,cin,s,cout,M);
+  input [3:0] in1,in2;
+  input M;
+  output reg[3:0] s;
+  output reg cout;
+  wire c1,c2,c3;
+  reg [3:0] temp;
+
+  xor g1(temp[0],M,in2[0]);
+  xor g2(temp[1],M,in2[1]);
+  xor(g3(temp[2],M,in2[2]);
+  xor(g4(temp[3],M,in2[3]);
+
+  full_adder G0(in1[0],temp[0],M,s[0],c1);
+  full_adder G1(in1[1],temp[1],M,s[1],c2);
+  full_adder G2(in1[2],temp[2],M,s[2],c3);
+  full_adder G3(in1[3],temp[3],M,s[3],cout);
+endmodule
