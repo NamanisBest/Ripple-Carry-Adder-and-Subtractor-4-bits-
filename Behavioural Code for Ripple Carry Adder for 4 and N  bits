@@ -1,0 +1,60 @@
+// In this code we will instantiate Full_Adder module
+// First of all we will define full_adder module
+
+
+
+module full_adder (a,b,cin,s,cout);
+  input a,b,cin;
+  output s,cout;
+  assign s = a^b^cin;
+  assign cout = (a&b)| (c&(a^b));
+endmodule
+
+
+
+
+// Code for Ripple carry Adder to find sum of 4 bits of ach a and b
+module ripple_carry_adder (in1,in2,cin,s,cout);
+  input [3:0] in1;
+  input [3:0] in2;
+  output [3:0] s;
+  output cout;
+
+  wire c1,c2,c3;
+
+  full_adder f0(in1[0],in2[0],0,out[0],c1);
+  full_adder f1(in1[1],in2[1],c1,out[1],c2);
+  full_adder f2(in1[2],in2[2],c2,out[2],c3);
+  full_adder f3(in1[3],in2[3],c3,out[3],cout);
+
+endmodule
+
+
+
+
+// code to add n bits of two binary numbers a and b
+
+module N_bit_adder (in1,in2,cin,s,cout,N);
+  input [N-1:0] in1;
+  input [N-1:0] in2;
+  input [N-1:0] s;
+  output cout;
+  input N;
+
+  wire [N-1:0] carry;
+
+  genvar i;
+  generate
+  for (i = 0; i < N; i = i + 1) begin
+        if (i == 0)
+            FullAdder f(a[0], b[0], cin, s[0], carry[0]);
+        else
+            FullAdder f(a[i], b[i], carry[i-1], s[i], carry[i]);
+    end
+
+    assign cout = carry[N-1];
+    endgenerate
+endmodule
+    
+  
+  
